@@ -531,8 +531,6 @@
         }
         });
 
-
-        
         const form = document.forms[0];
 
         $('#form_add_row').on('submit', function (e){
@@ -548,16 +546,13 @@
                 data + form.office.value,
                 data + form.age.value,
                 data + form.start_date.value,
-                data + form.name.value
+                data + form.salary.value
             ] ).draw( false );
             data = NULL;
             
         } );
-        
 
-        
     });// End Document
-
 
     </script>
 
