@@ -13,14 +13,6 @@
 
 </head>
 
-<style>
-    *{
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    #datatables{
-        margin: 0px 200px;
-    }
-</style>
 <body>
     
     <br>
@@ -58,12 +50,15 @@
     </div>
 
 
-    <!-- Arrays from data.js -->
+    <!-- import const Arrays from data.js -->
     <script src="./data.js"></script>
 
 
     <script>
     $(document).ready( function () {
+
+        const form = document.forms[0];
+
         let table = $('#example').DataTable({
             data: arrays,
             "language": {
@@ -71,10 +66,8 @@
             }
         });
         
-        const form = document.forms[0];
-
-        $('#addRow').on( 'click', function () {
-            table.row.add( [
+        async function  add_row(){
+            await table.row.add( [
                 form.name.value,
                 form.position.value,
                 form.office.value,
@@ -82,13 +75,18 @@
                 form.start_date.value,
                 form.salary.value
             ]).draw( false );
-            form.reset();
+        }
+
+        $('#addRow').on( 'click', function () {
+
+            // after func add_row is end then do
+            // reset Form.
+            add_row().then(() => form.reset());
         });
 
-    });// End Document
+    });// End Document.
 
     </script>
-
 
 </body>
 </html>
