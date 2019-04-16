@@ -60,17 +60,15 @@
     $(document).ready( function () {
 
         const form = document.forms[0];
+        const selector = $('#example');
 
-        const data_tables = new Data_tables(arrays, form);
+        const data_tables = new Data_tables(arrays, form, selector);
 
         // add Row on click evant.
         $('#addRow').on( 'click', function () {
-
             data_tables.add_row() // it's after func add_row finish? then do reset Form.
             .then(() => form.reset());
-
         });
-
 
     });// End Document.
 

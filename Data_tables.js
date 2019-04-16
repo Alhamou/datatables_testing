@@ -1,15 +1,18 @@
 class Data_tables {
-    constructor(arrays, form) {
+    constructor(arrays, form, selector) {
         this.arrays = arrays;
         this.form = form;
-    }
 
-    table = $('#example').DataTable({
-        data: arrays,
-        "language": {
-            "url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/German.json"
-        }
-    });
+
+        this.table = selector.DataTable({
+            data: arrays,
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/German.json"
+            }
+        });
+
+    }
+     
 
     async add_row (){
         await this.table.row.add( [
