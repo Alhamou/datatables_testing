@@ -1,4 +1,4 @@
-class Data_tables {
+class Data_table {
     constructor(arrays, form, selector) {
         this.arrays = arrays;
         this.form = form;

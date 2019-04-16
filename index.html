@@ -53,7 +53,7 @@
     <!-- import const Arrays from data.js -->
     <script src="./data.js"></script>
 
-    <script src="./Data_tables.js"></script>
+    <script src="./Data_table.js"></script>
 
 
     <script>
@@ -62,11 +62,11 @@
         const form = document.forms[0];
         const selector = $('#example');
 
-        const data_tables = new Data_tables(arrays, form, selector);
+        const data_table = new Data_table(arrays, form, selector);
 
         // add Row on click evant.
         $('#addRow').on( 'click', function () {
-            data_tables.add_row() // it's after func add_row finish? then do reset Form.
+            data_table.add_row() // it's after func add_row finish? then do reset Form.
             .then(() => form.reset());
         });
 
