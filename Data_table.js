@@ -1,28 +1,27 @@
 class Data_table {
-    constructor(arrays, form, selector) {
-        this.arrays = arrays;
-        this.form = form;
 
 
-        this.table = selector.DataTable({
-            data: arrays,
-            "language": {
-                "url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/German.json"
-            }
-        });
+    constructor() {}
 
-    }
-     
 
-    async add_row (){
-        await this.table.row.add( [
-            this.form.name.value,
-            this.form.position.value,
-            this.form.office.value,
-            this. form.age.value,
-            this.form.start_date.value,
-            this.form.salary.value
-        ]).draw( false );
+    // add new Row from [Form Object].
+    async add_row (form){
+
+        let arr = [];
+
+        // return validation erro Message for Client.
+        let validation_error = {error: '', message: ''};
+
+        // each Form Object.
+        for ( let i of form) {
+
+            ////////////////////////////////////////////////////////////////////
+            // add Code hear for validation the Data befor storage in Database//
+            ////////////////////////////////////////////////////////////////////
+
+            arr = [...arr, i.value];
+        }
+        await this.table.row.add(arr).draw();
     }
 
 }
