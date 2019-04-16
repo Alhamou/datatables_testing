@@ -53,38 +53,27 @@
     <!-- import const Arrays from data.js -->
     <script src="./data.js"></script>
 
+    <script src="./Data_tables.js"></script>
+
 
     <script>
     $(document).ready( function () {
 
         const form = document.forms[0];
 
-        let table = $('#example').DataTable({
-            data: arrays,
-            "language": {
-                "url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/German.json"
-            }
-        });
-        
-        async function  add_row(){
-            await table.row.add( [
-                form.name.value,
-                form.position.value,
-                form.office.value,
-                form.age.value,
-                form.start_date.value,
-                form.salary.value
-            ]).draw( false );
-        }
+        const data_tables = new Data_tables(arrays, form);
 
+        // add Row on click evant.
         $('#addRow').on( 'click', function () {
 
-            // after func add_row is end then do
-            // reset Form.
-            add_row().then(() => form.reset());
+            data_tables.add_row() // it's after func add_row finish? then do reset Form.
+            .then(() => form.reset());
+
         });
 
+
     });// End Document.
+
 
     </script>
 
