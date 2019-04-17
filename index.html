@@ -187,13 +187,11 @@
         } );
 
        
-        $('#example tbody').on('click', 'tr', function (e) {
+        
+        $('#example tbody').on( 'click', 'tr .edit_row',function(e){
 
-                // check if Row is Deleted befor.
-                if (e.target.id === "delete_row") return false;
+                const data = data_table.getRow(e.target.closest('tr'));
 
-                const data = data_table.getRow(this);
-                
                 const html = `
                 <form id="show_idet_form" class="show_idet_form container"><br>
                     <input value="${data.name}" type="text" name="name" class="form-control " placeholder="Name" autocomplete="off"><br>
@@ -208,12 +206,10 @@
                     <button id="edit_button" onclick="edit_row(this)" type="button" class="btn btn-success">Save change</button>
                 </div>
                 `
+
                 $('#each_row').empty().append(html);
-        });
-        
-        $('#example tbody').on( 'click', 'tr .edit_row',function(e){
-                $('.myModal').modal('show')
-           
+
+                $('.myModal').modal('show');
         });
        
         
