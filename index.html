@@ -19,35 +19,79 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-3">
-                <br>
-                <h2 class="m-2">Hinzufügen..</h2>
-                <form id="form">
-                    <input type="text" name="name" class="form-control m-2" placeholder="Name" autocomplete="off">
-                    <input type="text" name="position" class="form-control m-2" placeholder="Position" autocomplete="off">
-                    <input type="text" name="office" class="form-control m-2" placeholder="Office" autocomplete="off">
-                    <input type="text" name="age" class="form-control m-2" placeholder="Age" autocomplete="off">
-                    <input type="text" name="start_date" class="form-control m-2" placeholder="Start Date" autocomplete="off">
-                    <input type="text" name="salary" class="form-control m-2" placeholder="Salary" autocomplete="off">
-                </form>
-                <button class="btn btn-info m-2" id="addRow">hinzufügen</button>
-            </div>
-            <div class="col-9">
+            <div class="col-8 offset-2">
+                    <!-- Button trigger modal -->
+  
                 <table id="example" class="display" style="width:100%">
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Position</th>
-                            <th>Position</th>
+                            <th>Office</th>
                             <th>Age</th>
                             <th>Start date</th>
                             <th>Salary</th>
                         </tr>
                     </thead>
                 </table>
+                
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalCenter">
+                        + hinzufügen
+                </button>
+                
+            </div>
+            
+        </div>
+    </div>
+
+
+    <!-- Start Modal Bootstrap -->
+
+  
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Hinzufügen..</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <input type="text" name="name" class="form-control " placeholder="Name" autocomplete="off"><br>
+                    <input type="text" name="position" class="form-control " placeholder="Position" autocomplete="off"><br>
+                    <input type="text" name="office" class="form-control " placeholder="Office" autocomplete="off"><br>
+                    <input type="text" name="age" class="form-control " placeholder="Age" autocomplete="off"><br>
+                    <input type="text" name="start_date" class="form-control " placeholder="Start Date" autocomplete="off"><br>
+                    <input type="text" name="salary" class="form-control " placeholder="Salary" autocomplete="off"><br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button data-dismiss="modal" id="addRow" type="button" class="btn btn-primary">hinzufügen</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+    <!-- myModal Show Row and Edit -->
+    <div class="modal fade myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div id="each_row" class="modal-content">
+                <!-- each Data hear from Jquery -->
             </div>
         </div>
     </div>
+   
+   
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- End Modal Bootstrap -->
+
+
 
 
     <!-- import const Arrays from data.js -->
@@ -57,39 +101,107 @@
 
 
     <script>
+        function edit_row (button){
+            console.log($(button).text('Save').removeClass('btn-warning').addClass('btn-success'))
+            let form = document.querySelector('#show_idet_form');
+            const arr = [
+                form.name,
+                form.position,
+                form.office,
+                form.age,
+                form.start_date,
+                form.salary
+            ];
+            $(arr).attr('disabled', false)
+        };
+    </script>
+    
+    <script>
     $(document).ready( function () {
 
-        
         const form = document.querySelector('#form');
+        const selector = $('#example');
 
-        // new class vererbung von class Data_table.
-        class Table extends Data_table {
-            constructor (){
-                super();
-            }
-        }
 
         // create new Object.
-        const datatable = new Table();
+        const data_table = new Data_table();
 
-        // set table Object.
-        datatable.table = $('#example').DataTable({
-                                data: arrays
-                          });
+        data_table.table = selector.DataTable({
+            data : arrays,
+            "columns" : [
+                { "data" : 'name' },
+                { "data" : 'position' },
+                { "data" : 'office' },
+                { "data" : 'age' },
+                { "data" : 'start_date' },
+                { "data" : 'salary' },
+                { "data" : 'id' }
+            ],
+            "columnDefs": [
+            {
+                "targets": [ 6 ],
+                "visible": false,
+                "searchable": false
+            }
+        ]
 
+        });
 
         // add Row on click evant.
         $('#addRow').on( 'click', function () {
-            datatable.add_row(form) // it's after func add_row finish? then do reset Form.
+
+            const obj = {};
+
+            obj.name = form.name.value;
+            obj.position = form.position.value;
+            obj.office = form.office.value;
+            obj.age = form.age.value;
+            obj.start_date = form.start_date.value;
+            obj.salary = form.salary.value;
+            obj.id = arrays.length + 1;
+
+            data_table.save(obj) // it's after func add_row finish? then do reset Form.
                 .then(() => form.reset());
         });
+        
+        
+
+        $('#example tbody').on('click', 'tr', function () {
+                var data = data_table.table.row( this ).data();
+                const html = `
+                <form id="show_idet_form" class="show_idet_form container"><br>
+                    <input disabled value="${data.name}" type="text" name="name" class="form-control " placeholder="Name" autocomplete="off"><br>
+                    <input disabled value="${data.position}" type="text" name="position" class="form-control " placeholder="Position" autocomplete="off"><br>
+                    <input disabled value="${data.office}" type="text" name="office" class="form-control " placeholder="Office" autocomplete="off"><br>
+                    <input disabled value="${data.age}" type="text" name="age" class="form-control " placeholder="Age" autocomplete="off"><br>
+                    <input disabled value="${data.start_date}" type="text" name="start_date" class="form-control " placeholder="Start Date" autocomplete="off"><br>
+                    <input disabled value="${data.salary}" type="text" name="salary" class="form-control " placeholder="Salary" autocomplete="off"><br>
+                </form>
+                
+                <div class="modal-footer">
+                    <button data-dismiss="modal" type="button" class="btn btn-light">Clase</button>
+                    <button id="edit_button"  onclick="edit_row(this)" type="button" class="btn btn-warning">Edit Item</button>
+                </div>
+                `
+                $('#each_row').empty().append(html);
+        });
+        
+        $('#example').click(function(e){
+            if(e.target.tagName === 'TD'){
+                $('.myModal').modal('show')
+
+            }
+        });
+        
 
 
 
-
-
-
-
+        // // new class vererbung von class Data_table.
+        // class Table extends Data_table {
+        //     constructor (){
+        //         super();
+        //     }
+        // }
 
 
 
@@ -98,6 +210,8 @@
     });// End Document.
 
     </script>
+
+
 
 </body>
 </html>
