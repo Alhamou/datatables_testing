@@ -105,7 +105,6 @@
         // Function für zeigen das Row verarbeitung.
         function edit_row (button){
 
-
             let form = document.querySelector('#show_idet_form');
             const arr = [
                 form.name,
@@ -154,23 +153,15 @@
                     { 
                         "targets": [ 6 ],
                         "render": function(data, type, full, meta){
-                            if (data === ''){
-                                return `
-                            <button  class='edit_row btn btn-success'>Save</button>&nbsp;
-                            <button id="delete_row"class='btn btn-danger'>Del</button>`
-                            } else {
                                 return `
                             <button class='edit_row btn btn-info'>Edit</button>&nbsp;
                             <button id="delete_row"class='btn btn-danger'>${data}</button>`
-                            }
-                            
                         }
                     }
                 ]
 
         });
 
-        
 
         // add Row on click evant.
         $('#addRow').on( 'click', function () {
@@ -192,14 +183,10 @@
         
 
         $('#example tbody').on( 'click', '#delete_row', function (e) {
-            data_table.table
-                .row( $(this).parents('tr') )
-                .remove()
-                .draw();
+            data_table.delete($(this).closest('tr'))
         } );
 
-
-
+       
         $('#example tbody').on('click', 'tr', function (e) {
 
                 // check if Row is Deleted befor.
@@ -223,12 +210,12 @@
                 $('#each_row').empty().append(html);
         });
         
-        $('.edit_row').click(function(e){
+        $('#example tbody').on( 'click', 'tr .edit_row',function(e){
                 $('.myModal').modal('show')
            
         });
        
-
+        
 
         // // new class vererbung von class Data_table.
         // class Table extends Data_table {
@@ -237,10 +224,6 @@
         //     }
         // }
      
-
- 
-
-
 
     });// End Document.
 

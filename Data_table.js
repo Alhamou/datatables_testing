@@ -2,7 +2,7 @@ class Data_table {
 
 
     constructor( ) {
-
+       
     }
     
     // add new Row from [Form Object].
@@ -10,6 +10,12 @@ class Data_table {
   
         await this.table.row.add(object).draw();
     }
-
-   
+    delete (row){
+        this.table
+                .row(row )
+                .remove()
+                .draw();
+              
+    }
+    
 }
