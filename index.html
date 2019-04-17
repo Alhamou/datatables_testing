@@ -191,8 +191,9 @@
 
                 // check if Row is Deleted befor.
                 if (e.target.id === "delete_row") return false;
-            
-                var data = data_table.table.row( this ).data();
+
+                const data = data_table.getRow(this);
+                
                 const html = `
                 <form id="show_idet_form" class="show_idet_form container"><br>
                     <input value="${data.name}" type="text" name="name" class="form-control " placeholder="Name" autocomplete="off"><br>
