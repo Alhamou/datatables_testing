@@ -5,37 +5,37 @@
       name : 'Angelica Ramos1',
       position : 'Chief Executive Officer (CEO)', 
       office : 'London', 
-      age : 234 ,
       start_date : '2009/10/09',
       salary : '$162,700',
-      id:1
+      id:1,
+      option: 'Del'
     },
     {
       name : 'Angelica Ramos2',
       position : 'Chief Executive Officer (CEO)', 
       office : 'London', 
-      age : 234 ,
       start_date : '2009/10/09',
       salary : '$162,700',
-      id:2
+      id:2,
+      option: 'Del'
     },
     {
       name : 'Angelica Ramos3',
       position : 'Chief Executive Officer (CEO)', 
       office : 'London', 
-      age : 234 ,
       start_date : '2009/10/09',
       salary : '$162,700',
-      id:3
+      id:3,
+      option: 'Del'
     },
     {
       name : 'Angelica Ramos4',
       position : 'Chief Executive Officer (CEO)', 
       office : 'London', 
-      age : 234 ,
       start_date : '2009/10/09',
       salary : '$162,700',
-      id:4
+      id:4,
+      option: 'Del'
     },
     
     
