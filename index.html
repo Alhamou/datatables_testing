@@ -20,33 +20,24 @@
 <body>
     <br>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-10 offset-1">
-  
-                <table id="example" class="display" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
-                            <th>id</th>
-                            <th>Option</th>
-                        </tr>
-                    </thead>
-                </table>
-                
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalCenter">
-                        + hinzufügen
-                </button>
-                
-            </div>
-            
-        </div>
+    <div class="container">
+        <table id="example" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Start date</th>
+                    <th>Salary</th>
+                    <th>id</th>
+                    <th>Option</th>
+                </tr>
+            </thead>
+        </table>
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalCenter">
+                + hinfügen
+        </button>
     </div>
-
 
     <!-- Start Modal Bootstrap -->
 
@@ -56,7 +47,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Hinzufügen..</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle">Hinfügen..</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -71,7 +62,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">schließen</button>
                 <button data-dismiss="modal" id="addRow" type="button" class="btn btn-primary">hinzufügen</button>
             </div>
         </div>
@@ -91,7 +82,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <!-- End Modal Bootstrap -->
-
 
 
 
@@ -127,14 +117,13 @@
 
         const form = document.querySelector('#form');
         const selector = $('#example');
-
-
         // create new Object.
+
+
         const data_table = new Data_table();
 
         data_table.table = selector.DataTable({
             
-           
             data : arrays,
             "columns" : [
                     { "data" : 'name' },
@@ -150,7 +139,7 @@
 
                     { className: "text-center", "targets": [ 2, 3 ,4, 6 ] },
                     {
-                        "targets": [ 5 ],
+                        "targets": [ 5 ], // id Column.
                         "visible": false,
                         "searchable": false
                     },
@@ -159,7 +148,7 @@
                         "render": function(data, type, full, meta){
                                 return `
                             <button class='edit_row btn btn-info'>Edit</button>&nbsp;
-                            <button id="delete_row"class='btn btn-danger'>${data}</button>`
+                            <button class='delete_row btn btn-danger'>${data}</button>`
                         }
                     }
                 ]
@@ -186,9 +175,9 @@
         
         
 
-        $('#example tbody').on( 'click', '#delete_row', function (e) {
-            data_table.delete($(this).closest('tr'))
-        } );
+        $('#example tbody').on( 'click', '.delete_row', function (e) {
+            data_table.delete(e.target.closest('tr'))
+        });
 
        
         
@@ -197,7 +186,7 @@
                 const data = data_table.getRow(e.target.closest('tr'));
 
                 const html = `
-                <form id="show_idet_form" class="show_idet_form container"><br>
+                <form id="show_idet_form" class="show_idet_form"><br>
                     <input value="${data.name}" type="text" name="name" class="form-control " placeholder="Name" autocomplete="off"><br>
                     <input value="${data.position}" type="text" name="position" class="form-control " placeholder="Position" autocomplete="off"><br>
                     <input value="${data.office}" type="text" name="office" class="form-control " placeholder="Office" autocomplete="off"><br>
@@ -218,12 +207,7 @@
        
         
 
-        // // new class vererbung von class Data_table.
-        // class Table extends Data_table {
-        //     constructor (){
-        //         super();
-        //     }
-        // }
+
      
 
     });// End Document.
