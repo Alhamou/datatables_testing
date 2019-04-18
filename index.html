@@ -14,7 +14,7 @@
 </head>
         <style>
             input {
-                color : red !important;
+                color : rgb(194, 92, 92) !important;
             }
         </style>
 <body>
@@ -186,7 +186,7 @@
                 const data = data_table.getRow(e.target.closest('tr'));
 
                 const html = `
-                <form id="show_idet_form" class="show_idet_form"><br>
+                <form id="show_idet_form" class="show_idet_form container"><br>
                     <input value="${data.name}" type="text" name="name" class="form-control " placeholder="Name" autocomplete="off"><br>
                     <input value="${data.position}" type="text" name="position" class="form-control " placeholder="Position" autocomplete="off"><br>
                     <input value="${data.office}" type="text" name="office" class="form-control " placeholder="Office" autocomplete="off"><br>
