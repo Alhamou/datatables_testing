@@ -92,27 +92,6 @@
 
 
     <script>
-
-
-
-        // Function für zeigen das Row verarbeitung.
-        function edit_row (button){
-
-            let form = document.querySelector('#show_idet_form');
-            const arr = [
-                form.name,
-                form.position,
-                form.office,
-                form.start_date,
-                form.salary
-            ];
-            $(arr).attr('disabled', false);
-        };
-        
-
-    </script>
-    
-    <script>
     $(document).ready( function () {
 
         const form = document.querySelector('#form');
@@ -173,12 +152,10 @@
                 .then(() => form.reset());
         });
         
-        
 
         $('#example tbody').on( 'click', '.delete_row', function (e) {
             data_table.delete(e.target.closest('tr'))
         });
-
        
         
         $('#example tbody').on( 'click', 'tr .edit_row',function(e){
@@ -195,8 +172,8 @@
                 </form>
                 
                 <div class="modal-footer">
-                    <button data-dismiss="modal" type="button" class="btn btn-light">Cancel</button>
-                    <button id="edit_button" onclick="edit_row(this)" type="button" class="btn btn-success">Save change</button>
+                    <button data-dismiss="modal" type="button" class="btn btn-light">Abbrechen</button>
+                    <button id="edit_button" onclick="" type="button" class="btn btn-success">Speichern</button>
                 </div>
                 `
 
